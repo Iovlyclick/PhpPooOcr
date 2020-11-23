@@ -1,14 +1,22 @@
 <?php
 class Personnage
 {
-    private $_force = 20; //la force du personnage (valeur utilisé par l'attaque)
-    private $_experience = 0; //l'exp du personnage
-    private $_degats = 0; //les degats du personnage
+    private $_force; //la force du personnage (valeur utilisé par l'attaque)
+    private $_experience; //l'exp du personnage
+    private $_degats; //les degats du personnage
 
-    public function __construct($force, $degats) // Constructeur demandant 2 paramètres
+    //déclarations des constantes en rapport avec la force
+    const FORCE_PETITE = 20;
+    const FORCE_MOYENNE = 50;
+    const FORCE_GRANDE = 80;
+
+    //variable statique PRIVEE
+    private static $_texteADire = "La haine blesse celui qui la porte";
+
+    public function __construct($forceInitiale, $degats) // Constructeur demandant 2 paramètres
     {
         echo 'Voici le constructeur !<br/>'; // Message s'affichant une fois qu'une instance de l'objet est créé.
-        $this->setForce($force); // Initialisation de la force.
+        $this->setForce($forceInitiale); // Initialisation de la force.
         $this->setDegats($degats); // Initialisation des dégâts.
         $this->_experience = 1; // Initialisation de l'expérience à 1.
     }
@@ -46,7 +54,11 @@ class Personnage
             return;
         }
 
-        $this->_force = $force;
+        //on vérifier que $force passé en paramètre est bien une constante de la classe
+        if (in_array($force, [self::FORCE_PETITE, self::FORCE_MOYENNE, self::FORCE_GRANDE])) 
+        {
+            $this->_force = $force;
+        }
     }
 
     //setter de $_experience
@@ -96,5 +108,10 @@ class Personnage
     public function degats()
     {
         return $this->_degats;
+    }
+
+    public static function parler()
+    {
+        echo self::$_texteADire;
     }
 }
