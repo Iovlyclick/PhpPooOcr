@@ -1,9 +1,17 @@
 <?php
 class Personnage
 {
-    private $_degats = 0; //les degats du personnage
-    private $_experience = 0; //l'exp du personnage
     private $_force = 20; //la force du personnage (valeur utilisé par l'attaque)
+    private $_experience = 0; //l'exp du personnage
+    private $_degats = 0; //les degats du personnage
+
+    public function __construct($force, $degats) // Constructeur demandant 2 paramètres
+    {
+        echo 'Voici le constructeur !<br/>'; // Message s'affichant une fois qu'une instance de l'objet est créé.
+        $this->setForce($force); // Initialisation de la force.
+        $this->setDegats($degats); // Initialisation des dégâts.
+        $this->_experience = 1; // Initialisation de l'expérience à 1.
+    }
 
     public function frapper(Personnage $cible)
     {
@@ -39,7 +47,6 @@ class Personnage
         }
 
         $this->_force = $force;
-
     }
 
     //setter de $_experience
@@ -58,13 +65,19 @@ class Personnage
         }
 
         $this->_experience = $experience;
-
     }
 
-    //getter de $_degats: renvoie le contenu de l'attribut $_degats
-    public function degats()
+    //setter de $_degats.
+    public function setDegats($degats)
     {
-        return $this->_degats;
+        if (!is_int($degats)) //si $experience n'est pas un entier
+        {
+        trigger_error('Le niveau de dégâts d\'un personnage doit être un nombre entier', E_USER_WARNING);
+
+        return;
+        }
+
+    $this->_degats = $degats;
     }
 
     //getter de $_force: renvoie le contenu de l'attribut $_force
@@ -78,25 +91,10 @@ class Personnage
     {
         return $this->_experience;
     }
+
+    //getter de $_degats: renvoie le contenu de l'attribut $_degats
+    public function degats()
+    {
+        return $this->_degats;
+    }
 }
-
-$perso1 = new Personnage;
-$perso2 = new Personnage;
-
-$perso1->setForce(10);
-$perso1->setExperience(2);
-
-$perso2->setForce(90);
-$perso2->setExperience(58);
-
-$perso1->frapper($perso2);
-$perso1->gagnerExperience();
-
-$perso2->frapper($perso1);
-$perso2->gagnerExperience();
-
-echo 'La force du personnage 1 est de : ' . $perso1->force() . '. il a ' . $perso1->experience(). ' points d\'éxperience et son niveau de dégat et de ' . $perso1->degats() . '<br/>';
-
-echo 'La force du personnage 2 est de : ' . $perso2->force() . '. il a ' . $perso2->experience(). ' points d\'éxperience et son niveau de dégat et de ' . $perso2->degats() . '<br/>';
-
-
