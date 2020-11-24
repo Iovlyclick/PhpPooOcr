@@ -106,6 +106,6 @@ class Personnage
             $this->_experience = $exp;
         }
     }
-
-
+  
+  
 }
