@@ -7,9 +7,10 @@ function chargerClasse($classe)
 
 spl_autoload_register('chargerClasse'); //autoload fonction appellée à l'instanciation d'une classe absente du fichier
 
-$perso1 = new Personnage(60, 0);
-$perso2 = new Personnage(100, 10);
+$perso1 = new Personnage(Personnage::FORCE_MOYENNE, 0);
+$perso2 = new Personnage(Personnage::FORCE_PETITE, 10);
 
+Personnage::parler();
 // $perso1->setForce(10);
 // $perso1->setExperience(2);
 
