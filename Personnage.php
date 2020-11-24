@@ -1,100 +1,106 @@
 <?php
+
 class Personnage
 {
-    private $_force = 20; //la force du personnage (valeur utilisé par l'attaque)
-    private $_experience = 0; //l'exp du personnage
-    private $_degats = 0; //les degats du personnage
+    private $_id;
+    private $_nom;
+    private $_forcePerso;
+    private $_degats;
+    private $_experience;
+    private $_niveau;
 
-    public function __construct($force, $degats) // Constructeur demandant 2 paramètres
+    public function hydrate(array $donnees)
     {
-        echo 'Voici le constructeur !<br/>'; // Message s'affichant une fois qu'une instance de l'objet est créé.
-        $this->setForce($force); // Initialisation de la force.
-        $this->setDegats($degats); // Initialisation des dégâts.
-        $this->_experience = 1; // Initialisation de l'expérience à 1.
-    }
-
-    public function frapper(Personnage $cible)
-    {
-        //on ajoute la valeur de $_force de l'objet courant à la valeur de l'attribut $_degats de l'objet contenu dans $cible
-        $cible->_degats += $this->_force;
-    }
-
-    public function gagnerExperience()
-    {
-        //on ajoute 1 à l'attributs $_experience
-        $this->_experience++;
-    }
-
-    public function afficherExperience()
-    {
-        //on affiche la valeur de l'attribut $_experience
-        echo $this->_experience; 
-    }
-
-    //setter de $_force
-    public function setForce($force)
-    {
-        if (!is_int($force)) //si $force n'est pas un entier
-        {
-            trigger_error('La force d\'un personnage doit être un nombre entier', E_USER_WARNING);
-            return;
+        foreach ($donnees as $cle => $valeur) {
+            $method = 'set'.ucfirst($cle);
+            if (method_exists($this, $method)) {
+                $this->$method($valeur);
+            }
         }
+    }
 
-        if ($force > 100) //on vérifie qu'on n'assigne pas une valeur supérieure à 100
+    public function getId() 
+    {
+        return $this->$_id;
+    }
+
+    public function getNom() 
+    {
+        return $this->$_nom;
+    }
+
+    public function getForcePerso() 
+    {
+        return $this->$_forcePerso;
+    }
+
+    public function getDegats() 
+    {
+        return $this->$_degats;
+    }
+
+    public function getExperience() 
+    {
+        return $this->$_experience;
+    }
+
+    public function getNiveau() 
+    {
+        return $this->$_niveau;
+    }
+
+    public function setId($id) 
+    {
+        $this->_id = (int) $id;
+    }
+
+    public function setNom($nom) 
+    {
+        if (is_string($nom) && strlen($nom) <=30)
         {
-            trigger_error('La force d\'un personnage ne peut pas dépasser 100', E_USER_WARNING);
-            return;
+            $this->_nom = $nom;
         }
-
-        $this->_force = $force;
     }
 
-    //setter de $_experience
-    public function setExperience($experience)
+    public function setForcePerso($forcePerso) 
     {
-        if (!is_int($experience)) //si $experience n'est pas un entier
+        $forcePerso = (int) $forcePerso;
+
+        if ($forcePerso >= 0 && $forcePerso <= 100)
         {
-            trigger_error('L\'éxperience d\'un personnage doit être un nombre entier', E_USER_WARNING);
-            return;
+            $this->_forcePerso = $forcePerso;
         }
+    }
 
-        if ($experience > 100) //on vérifie qu'on n'assigne pas une valeur supérieure à 100
+    public function setDegats($degats) 
+    {
+        $degats = (int) $degats;
+
+        if ($degats >= 0 && $degats <= 100)
         {
-            trigger_error('L\'éxperience d\'un personnage ne peut pas dépasser 100', E_USER_WARNING);
-            return;
+            $this->_degats = $degats;
         }
-
-        $this->_experience = $experience;
     }
 
-    //setter de $_degats.
-    public function setDegats($degats)
+    public function setNiveau($niveau) 
     {
-        if (!is_int($degats)) //si $experience n'est pas un entier
+        $niveau = (int) $niveau;
+
+        if ($niveau >= 0 && $niveau <= 100)
         {
-        trigger_error('Le niveau de dégâts d\'un personnage doit être un nombre entier', E_USER_WARNING);
-
-        return;
+            $this->_niveau = $niveau;
         }
-
-    $this->_degats = $degats;
     }
 
-    //getter de $_force: renvoie le contenu de l'attribut $_force
-    public function force()
+    public function setExperience($exp) 
     {
-        return $this->_force;
+        $exp = (int) $exp;
+
+        if ($exp >= 0 && $exp <= 100)
+        {
+            $this->_experience = $exp;
+        }
     }
 
-    //getter de $_experience: renvoie le contenu de l'attribut $_experience
-    public function experience()
-    {
-        return $this->_experience;
-    }
 
-    //getter de $_degats: renvoie le contenu de l'attribut $_degats
-    public function degats()
-    {
-        return $this->_degats;
-    }
 }
