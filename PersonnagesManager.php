@@ -19,7 +19,7 @@ class PersonnagesManager
         $q->bindValue(':niveau', $perso->getNiveau(), PDO::PARAM_INT);
         $q->bindValue(':experience', $perso->getExperience(), PDO::PARAM_INT);
 
-        $q->execute;
+        $q->execute();
     }
 
     public function delete(Personnage $perso)
@@ -68,7 +68,7 @@ class PersonnagesManager
 
     public function setDb(PDO $db)
     {
-        $this->$_db = $db;
+        $this->_db = $db;
     }
 
 

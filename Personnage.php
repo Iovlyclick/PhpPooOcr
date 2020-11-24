@@ -9,6 +9,11 @@ class Personnage
     private $_experience;
     private $_niveau;
 
+    public function __construct($donnees)
+    {
+        $this->hydrate($donnees);
+    }
+
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $cle => $valeur) {
@@ -21,32 +26,32 @@ class Personnage
 
     public function getId() 
     {
-        return $this->$_id;
+        return $this->_id;
     }
 
     public function getNom() 
     {
-        return $this->$_nom;
+        return $this->_nom;
     }
 
     public function getForcePerso() 
     {
-        return $this->$_forcePerso;
+        return $this->_forcePerso;
     }
 
     public function getDegats() 
     {
-        return $this->$_degats;
+        return $this->_degats;
     }
 
     public function getExperience() 
     {
-        return $this->$_experience;
+        return $this->_experience;
     }
 
     public function getNiveau() 
     {
-        return $this->$_niveau;
+        return $this->_niveau;
     }
 
     public function setId($id) 
