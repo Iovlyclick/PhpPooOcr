@@ -3,28 +3,20 @@
 function chargerClasse($classe)
 {
   require $classe . '.php'; //le paramètre correspond au nom de classe après l'opérateur new
-}
+};
 
 spl_autoload_register('chargerClasse'); //autoload fonction appellée à l'instanciation d'une classe absente du fichier
 
-$perso1 = new Personnage(Personnage::FORCE_MOYENNE, 0);
-$perso2 = new Personnage(Personnage::FORCE_PETITE, 10);
+$perso = new Personnage([
+    'nom' => 'Victor',
+    'forcePerso' => 5, 
+    'degats' => 0,
+    'niveau' => 1,
+    'experience' => 0,
+]);
 
-Personnage::parler();
-// $perso1->setForce(10);
-// $perso1->setExperience(2);
+$db = new PDO('mysql:host=localhost;dbname=ocr_poo', 'root', 'toto');
 
-// $perso2->setForce(90);
-// $perso2->setExperience(58);
+$manager = new PersonnagesManager($db);
 
-// $perso1->frapper($perso2);
-// $perso1->gagnerExperience();
-
-// $perso2->frapper($perso1);
-// $perso2->gagnerExperience();
-
-// echo 'La force du personnage 1 est de : ' . $perso1->force() . '. il a ' . $perso1->experience(). ' points d\'éxperience et son niveau de dégat et de ' . $perso1->degats() . '<br/>';
-
-// echo 'La force du personnage 2 est de : ' . $perso2->force() . '. il a ' . $perso2->experience(). ' points d\'éxperience et son niveau de dégat et de ' . $perso2->degats() . '<br/>';
-
-
+$manager->add($perso);
