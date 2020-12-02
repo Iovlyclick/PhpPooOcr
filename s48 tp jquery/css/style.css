@@ -1,0 +1,48 @@
+body{
+    background-color: rgba(23, 151, 211, 0.671);    
+    text-align: center;
+}
+.title-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.title{
+    font-weight: bold;
+    border: 1px solid black; 
+    background-color: white;
+    padding: 2em;
+    min-width: 30%; 
+    
+}
+.content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#firstP, #secondP, #thirdP{
+    border: 1px solid black;    
+    padding: 2em; 
+    min-width: 30%;
+
+}
+#firstP{
+    background-color: rgb(125, 238, 110);
+}
+#secondP{
+    background-color: rgb(238, 236, 110);
+}
+#thirdP{
+    background-color: rgb(208, 110, 238);
+}
+
+
+.funky{
+    background-image: url('https://data.photofunky.net/output/image/e/b/c/c/ebcc2e/photofunky.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.notFunky{
+    background-color: rgba(23, 151, 211, 0.671);
+}
